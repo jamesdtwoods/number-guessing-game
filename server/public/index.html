@@ -5,11 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Guess A Number!</title>
-  <script src="scripts/client.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script defer src="scripts/client.js"></script>
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>YOUR GAME HERE!</h1>
+  <h1>YOUR GAME HERE!</h1>
+  <form onsubmit="submitRandom(event)">
+    <span>
+      <input placeholder="Player One" id="playerOne" type="text">
+      <input placeholder="Number" id="oneNumber" type="number">
+    </span>
+    <br>
+    <span>
+      <input placeholder="Player Two" id="playerTwo" type="text">
+      <input placeholder="Number" id="twoNumber" type="number">
+    </span>
+    <br>
+    <span>
+      <input placeholder="Player Three" id="playerThree" type="text">
+      <input placeholder="Number" id="threeNumber" type="number">
+    </span>
+    <br>
+    <span>
+      <button>Submit</button>
+      <button onclick="onReset()">Restart</button>
+    </span>
+  </form>
+  <table>
+    <thead>
+      <th>Player One</th>
+      <th>P1 Guess</th>
+      <th>Player Two</th>
+      <th>P2 Guess</th>
+      <th>Player Three</th>
+      <th>P3 Guess</th>
+      <th></th>
+    </thead>
+    <tbody id="playerRound">
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
+
+
+
+
+
