@@ -21,26 +21,26 @@ function submitRandom(event) {
   let numberOne = document.getElementById('oneNumber').value;
   let numberTwo = document.getElementById('twoNumber').value;
   let numberThree = document.getElementById('threeNumber').value;
-  document.getElementById('playerOne').value = '';
-  document.getElementById('playerTwo').value = '';
-  document.getElementById('playerThree').value = '';
-  document.getElementById('oneNumber').value = '';
-  document.getElementById('twoNumber').value = '';
-  document.getElementById('threeNumber').value = '';
+  // document.getElementById('playerOne').value = '';
+  // document.getElementById('playerTwo').value = '';
+  // document.getElementById('playerThree').value = '';
+  // document.getElementById('oneNumber').value = '';
+  // document.getElementById('twoNumber').value = '';
+  // document.getElementById('threeNumber').value = '';
   let newRound = [
     {
-      playerOne: playerOne,
-      numberOne: Number(numberOne)
+      playerName: playerOne,
+      playerNumber: Number(numberOne)
     },
     {
-      playerTwo: playerTwo,
-      numberTwo: Number(numberTwo),
+      playerName: playerTwo,
+      playerNumber: Number(numberTwo),
     },
     {
-      playerThree: playerThree,
-      numberThree: Number(numberThree)
+      playerName: playerThree,
+      playerNumber: Number(numberThree)
     }]
-
+    console.log(newRound);
   axios({
     method: 'POST',
     url: '/round',
