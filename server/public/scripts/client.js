@@ -4,12 +4,14 @@ function onReady() {
 
 onReady()
 
+let roundCounter =0;
 
 function onReset() {
   // technichally don't need to clear guesses, but it 
   // looked funny with them being there if playing multiple games
   let rounds = document.getElementById('playerRound');
   rounds.innerHTML = '';
+  roundCounter = 0;
   axios({
     method: 'POST',
     url: '/randomNumber'
@@ -47,6 +49,8 @@ function onSubmit() {
       playerName: playerThree,
       playerNumber: Number(numberThree)
     }]
+    roundCounter ++;
+    console.log(roundCounter);
     console.log('expect array of input guesses', newRound);
   axios({
     method: 'POST',
@@ -78,4 +82,7 @@ function renderRound(currentRound){
       <li>${currentRound[i].playerName} guessed ${currentRound[i].playerNumber} which is ${currentRound[i].numberComparison}</li>
     `
   }
+  document.getElementById('total-rounds').textContent = roundCounter;
+  
+  console.log('Expect a round counter');
 }
