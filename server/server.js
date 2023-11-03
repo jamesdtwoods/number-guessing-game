@@ -3,7 +3,8 @@ const bodyParser = require('body-parser')
 const app = express();
 const PORT = 5001;
 
-let randomNumber;
+let randomNumber = 0;
+let round =[];
 
 // This must be added before GET & POST routes.
 app.use(bodyParser.urlencoded({extended:true}))
@@ -15,10 +16,12 @@ app.use(express.static('server/public'));
 // GET & POST Routes go here
 app.post('/randomNumber', (req, res) => {
   console.log('POST /randomNumber is getting requeset')
-  console.log('req.body', req.body)
+  console.log('POST /randomNumber req.body', req.body)
   generateRandomNumber()
+  // forgot to clear out round
+  round = [];
   res.sendStatus(201)
-})
+});
 
 function generateRandomNumber() {
   randomNumber = Math.floor((Math.random()* 25 + 1));
@@ -27,23 +30,35 @@ function generateRandomNumber() {
 
  app.post('/round', (req, res) => {
   console.log('POST /round is getting requeset')
-  console.log('req.body', req.body)
-  let round = req.body;
-  for (let i=0; i< round.length; i++){
-    if (round[i].person.playerNumber === randomNumber){
-      round[i].person.numberComparison = '=';
-    } else if (round[i].person.playerNumber > randomNumber){
-      round[i].person.numberComparison = '>';
-    } else if (round[i].person.playerNumber < randomNumber){
-      round[i].person.numberComparison = '<';
+  console.log('POST /round req.body:', req.body)
+  let currentRound = req.body;
+  for (let i=0; i < currentRound.length; i++){
+    if (currentRound[i].playerNumber === randomNumber){
+      currentRound[i].numberComparison = 'CORRECT';
+      round.push(currentRound[i]);
+    } else if (currentRound[i].playerNumber > randomNumber){
+      currentRound[i].numberComparison = 'too high';
+      round.push(currentRound[i]);
+    } else if (currentRound[i].playerNumber < randomNumber){
+      currentRound[i].numberComparison = 'too low';
+      round.push(currentRound[i]);
     }
   }
-  console.log(round);
+  console.log('expect array with additions:', round);
   res.sendStatus(201)
-})
+});
+
+
+
+app.get('/round', (req, res) => {
+  console.log('GET/round is getting requeset')
+  console.log('GET/round req.body:', req.body)
+  console.log('expect updated array', round);
+  res.send(round);
+});
  
 
 
 app.listen(PORT, () => {
   console.log ('Server is running on port', PORT)
-})
+});

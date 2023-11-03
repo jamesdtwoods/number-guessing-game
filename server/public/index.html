@@ -12,7 +12,7 @@
 </head>
 <body>
   <h1>YOUR GAME HERE!</h1>
-  <form onsubmit="submitRandom(event)">
+  <form onsubmit="formSubmit(event)">
     <span>
       <input placeholder="Player One" id="playerOne" type="text">
       <input placeholder="Number" id="oneNumber" type="number">
@@ -29,29 +29,30 @@
     </span>
     <br>
     <span>
-      <button>Submit</button>
-      <button onclick="onReset()">Restart</button>
+      <button onclick="onSubmit()">Submit</button>
+      <button onclick="onReset()">New Game</button>
     </span>
   </form>
-  <table>
+  <!-- <table>
     <thead>
-      <th>Player One</th>
       <th>P1 Guess</th>
-      <th>Player Two</th>
+      <th>P1 Result</th>
       <th>P2 Guess</th>
-      <th>Player Three</th>
+      <th>P2 Result</th>
       <th>P3 Guess</th>
+      <th>P3 Result</th>
       <th></th>
     </thead>
-    <tbody id="playerRound">
-      <tr>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
+    <tbody id="table">
+      <tr id="playerRound">
       </tr>
     </tbody>
-  </table>
+  </table> -->
+  
+  <h2>Guesses:</h2>
+  <ul id="playerRound">
+      <!-- where guesses will go -->
+  </ul>
 </body>
 </html>
 

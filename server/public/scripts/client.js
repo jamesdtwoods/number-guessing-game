@@ -6,27 +6,32 @@ onReady()
 
 
 function onReset() {
+  let rounds = document.getElementById('playerRound');
+  rounds.innerHTML = '';
   axios({
     method: 'POST',
     url: '/randomNumber'
   })
 }
 
-
-function submitRandom(event) {
+function formSubmit(event) {
   event.preventDefault()
+}
+
+function onSubmit() {
+  
   let playerOne = document.getElementById('playerOne').value;
   let playerTwo = document.getElementById('playerTwo').value;
   let playerThree = document.getElementById('playerThree').value;
   let numberOne = document.getElementById('oneNumber').value;
   let numberTwo = document.getElementById('twoNumber').value;
   let numberThree = document.getElementById('threeNumber').value;
-  // document.getElementById('playerOne').value = '';
-  // document.getElementById('playerTwo').value = '';
-  // document.getElementById('playerThree').value = '';
-  // document.getElementById('oneNumber').value = '';
-  // document.getElementById('twoNumber').value = '';
-  // document.getElementById('threeNumber').value = '';
+  document.getElementById('playerOne').value = '';
+  document.getElementById('playerTwo').value = '';
+  document.getElementById('playerThree').value = '';
+  document.getElementById('oneNumber').value = '';
+  document.getElementById('twoNumber').value = '';
+  document.getElementById('threeNumber').value = '';
   let newRound = [
     {
       playerName: playerOne,
@@ -45,22 +50,44 @@ function submitRandom(event) {
     method: 'POST',
     url: '/round',
     data: newRound
-  })
-  // .then((response) => {
-  //   getRound()
-  // })
-  
-}
-
-function resetRound() {
-  axios({
-    method: 'POST',
-    url: '/randomNumber',
-    data: randomNumber
   }).then((response) => {
     getRound()
   })
+  
 }
+
+function getRound() {
+    axios({
+      url: '/round',
+      method: 'GET'
+  }).then((response) => {
+    let currentRound = response.data;
+    console.log(currentRound);
+    renderRound(currentRound)
+  })
+}
+
+function renderRound(currentRound){
+  let rounds = document.getElementById('playerRound');
+  rounds.innerHTML = '';
+  for (let i=0; i < currentRound.length; i++){
+    console.log('expect one person:', currentRound[i]);
+    rounds.innerHTML += `
+      <li>${currentRound[i].playerName} guessed ${currentRound[i].playerNumber} which is ${currentRound[i].numberComparison}</li>
+    `
+  }
+}
+
+
+// function resetRound() {
+//   axios({
+//     method: 'POST',
+//     url: '/randomNumber',
+//     data: randomNumber
+//   }).then((response) => {
+//     getRound()
+//   })
+// }
 
 
 
