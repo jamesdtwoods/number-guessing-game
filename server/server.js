@@ -18,14 +18,14 @@ app.post('/randomNumber', (req, res) => {
   console.log('POST /randomNumber is getting requeset')
   console.log('POST /randomNumber req.body', req.body)
   generateRandomNumber()
-  // forgot to clear out round
+  // forgot to clear out round, was getting the infinite guesses thing
   round = [];
   res.sendStatus(201)
 });
 
 function generateRandomNumber() {
   randomNumber = Math.floor((Math.random()* 25 + 1));
-  console.log(randomNumber);
+  console.log('the number for this round:', randomNumber);
  };
 
  app.post('/round', (req, res) => {
@@ -44,7 +44,7 @@ function generateRandomNumber() {
       round.push(currentRound[i]);
     }
   }
-  console.log('expect array with additions:', round);
+  console.log('expect array of guess with results', round);
   res.sendStatus(201)
 });
 
@@ -53,12 +53,12 @@ function generateRandomNumber() {
 app.get('/round', (req, res) => {
   console.log('GET/round is getting requeset')
   console.log('GET/round req.body:', req.body)
-  console.log('expect updated array', round);
+  console.log('expect array of guess with results', round);
   res.send(round);
 });
  
 
 
 app.listen(PORT, () => {
-  console.log ('Server is running on port', PORT)
+  console.log(`server is running at http://localhost:${PORT}`)
 });
